@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HabitFlow — Tracker tes habitudes</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dark">
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-icon">⚡</span>
+    <span class="logo-text">HabitFlow</span>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="nav-btn active" data-view="today">
+      <span class="nav-icon">☀️</span><span>Aujourd'hui</span>
+    </button>
+    <button class="nav-btn" data-view="dashboard">
+      <span class="nav-icon">📊</span><span>Dashboard</span>
+    </button>
+    <button class="nav-btn" data-view="calendar">
+      <span class="nav-icon">📅</span><span>Calendrier</span>
+    </button>
+    <button class="nav-btn" data-view="habits">
+      <span class="nav-icon">✏️</span><span>Gérer</span>
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="theme-toggle" id="themeToggle" title="Changer le thème">🌙</button>
+    <span class="version">v1.0</span>
+  </div>
+</aside>
+
+<!-- Mobile header -->
+<header class="mobile-header">
+  <button class="hamburger" id="hamburger">☰</button>
+  <span class="logo-text">⚡ HabitFlow</span>
+  <span></span>
+</header>
+
+<!-- Main -->
+<main class="main" id="main">
+
+  <!-- ── VIEW: TODAY ── -->
+  <section class="view active" id="view-today">
+    <div class="view-header">
+      <div>
+        <h1 class="view-title" id="todayTitle">Bonjour 👋</h1>
+        <p class="view-subtitle" id="todayDate"></p>
+      </div>
+      <div class="today-progress-wrap">
+        <svg class="ring" viewBox="0 0 56 56">
+          <circle class="ring-bg" cx="28" cy="28" r="24"/>
+          <circle class="ring-fg" id="ringFg" cx="28" cy="28" r="24"
+            stroke-dasharray="150.8" stroke-dashoffset="150.8"/>
+        </svg>
+        <span class="ring-label" id="ringLabel">0%</span>
+      </div>
+    </div>
+
+    <!-- Motivation -->
+    <div class="motivation-card" id="motivationCard">
+      <span class="motivation-icon">💬</span>
+      <p class="motivation-text" id="motivationText"></p>
+      <button class="btn-refresh-quote" id="refreshQuote" title="Nouvelle citation">🔄</button>
+    </div>
+
+    <!-- Streak banner -->
+    <div class="streak-banner" id="streakBanner"></div>
+
+    <!-- Habit list -->
+    <div class="section-header">
+      <h2>Habitudes du jour</h2>
+      <button class="btn-primary" id="openAddHabit">+ Ajouter</button>
+    </div>
+
+    <div class="habit-list" id="habitListToday">
+      <div class="empty-state" id="emptyToday">
+        <p>🌱 Aucune habitude encore.<br>Commence par en ajouter une !</p>
+      </div>
+    </div>
+
+    <!-- Quick stats row -->
+    <div class="quick-stats" id="quickStats"></div>
+  </section>
+
+  <!-- ── VIEW: DASHBOARD ── -->
+  <section class="view" id="view-dashboard">
+    <div class="view-header">
+      <div>
+        <h1 class="view-title">Dashboard</h1>
+        <p class="view-subtitle">Vue d'ensemble de tes progrès</p>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <div class="charts-row">
+      <div class="chart-card">
+        <h3>Complétion — 7 derniers jours</h3>
+        <canvas id="chartWeek"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Répartition par habitude</h3>
+        <canvas id="chartDoughnut"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card chart-full">
+      <h3>Évolution mensuelle</h3>
+      <canvas id="chartMonth"></canvas>
+    </div>
+
+    <div class="habits-ranking" id="habitsRanking">
+      <h3>Classement des habitudes</h3>
+      <div id="rankingList"></div>
+    </div>
+  </section>
+
+  <!-- ── VIEW: CALENDAR ── -->
+  <section class="view" id="view-calendar">
+    <div class="view-header">
+      <div>
+        <h1 class="view-title">Calendrier</h1>
+        <p class="view-subtitle">Heatmap de tes habitudes</p>
+      </div>
+      <div class="cal-nav">
+        <button class="btn-icon" id="calPrev">‹</button>
+        <span id="calMonthLabel"></span>
+        <button class="btn-icon" id="calNext">›</button>
+      </div>
+    </div>
+
+    <div class="heatmap-legend">
+      <span>Moins</span>
+      <div class="heatmap-scale">
+        <span class="h0"></span><span class="h1"></span>
+        <span class="h2"></span><span class="h3"></span><span class="h4"></span>
+      </div>
+      <span>Plus</span>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+
+    <div class="cal-detail" id="calDetail">
+      <p class="cal-detail-placeholder">Clique sur un jour pour voir le détail.</p>
+    </div>
+  </section>
+
+  <!-- ── VIEW: MANAGE HABITS ── -->
+  <section class="view" id="view-habits">
+    <div class="view-header">
+      <div>
+        <h1 class="view-title">Gérer les habitudes</h1>
+        <p class="view-subtitle">Ajoute, modifie ou supprime tes habitudes</p>
+      </div>
+      <button class="btn-primary" id="openAddHabit2">+ Ajouter</button>
+    </div>
+    <div class="manage-list" id="manageList"></div>
+  </section>
+
+</main>
+
+<!-- ── MODAL: Add / Edit Habit ── -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Nouvelle habitude</h2>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <label>Nom de l'habitude
+        <input type="text" id="habitName" placeholder="ex : Méditation, Sport, Lecture…" maxlength="40"/>
+      </label>
+      <label>Icône
+        <div class="emoji-picker" id="emojiPicker"></div>
+      </label>
+      <label>Couleur
+        <div class="color-picker" id="colorPicker"></div>
+      </label>
+      <label>Description (optionnel)
+        <input type="text" id="habitDesc" placeholder="Une courte description…" maxlength="80"/>
+      </label>
+      <label>Fréquence cible (jours/semaine)
+        <input type="range" id="habitFreq" min="1" max="7" value="7"/>
+        <span id="freqLabel">7 jours / semaine</span>
+      </label>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="modalCancel">Annuler</button>
+      <button class="btn-primary" id="modalSave">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
