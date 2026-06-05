@@ -2,19 +2,40 @@
 
 /* ── Motivational quotes ──────────────────────────────────── */
 const QUOTES = [
+  /* ── Napoleon Hill ── */
+  { text: "Le corps atteint ce que l'esprit croit.", author: "Napoleon Hill" },
+  { text: "Tout ce que l'esprit de l'homme peut concevoir et croire, il peut l'atteindre.", author: "Napoleon Hill" },
+  { text: "Chaque adversité porte en elle la graine d'un avantage équivalent ou plus grand.", author: "Napoleon Hill" },
+  { text: "La procrastination est l'opposé de l'action. C'est l'ennemi commun à presque tout être humain.", author: "Napoleon Hill" },
+  { text: "Un objectif est un rêve avec une date limite.", author: "Napoleon Hill" },
+  { text: "La pensée est la seule chose sur laquelle l'être humain a un contrôle total.", author: "Napoleon Hill" },
+  { text: "Maîtrisez votre esprit ou il vous maîtrisera.", author: "Napoleon Hill" },
+  { text: "Le succès vient à ceux qui ont pleinement conscience du succès.", author: "Napoleon Hill" },
+  { text: "Si vous ne pouvez pas faire de grandes choses, faites de petites choses de manière grandiose.", author: "Napoleon Hill" },
+  { text: "Définissez vos objectifs clairement. Le succès exige une planification précise.", author: "Napoleon Hill" },
+  { text: "La force et la croissance ne viennent que d'un effort et d'une lutte continus.", author: "Napoleon Hill" },
+  { text: "Les rêves ne se réalisent pas par hasard ; ils se réalisent par les choix que vous faites.", author: "Napoleon Hill" },
+  { text: "Réfléchissez deux fois avant de parler, car vos mots plantent la graine du succès ou de l'échec.", author: "Napoleon Hill" },
+  { text: "Le succès requiert d'abord de se préparer, puis de se décider à agir.", author: "Napoleon Hill" },
+  { text: "Vous êtes le maître de votre destin. Vous pouvez influencer, diriger et contrôler votre propre environnement.", author: "Napoleon Hill" },
+
+  /* ── James Clear — Atomic Habits ── */
+  { text: "Les habitudes sont les intérêts composés de l'amélioration de soi.", author: "James Clear — Atomic Habits" },
+  { text: "Un 1% d'amélioration chaque jour mène à des résultats 37 fois meilleurs en un an.", author: "James Clear — Atomic Habits" },
+  { text: "L'identité émerge de l'habitude. Chaque action est un vote pour la personne que tu veux devenir.", author: "James Clear — Atomic Habits" },
+  { text: "Vous ne vous élevez pas au niveau de vos objectifs. Vous tombez au niveau de vos systèmes.", author: "James Clear — Atomic Habits" },
+  { text: "Oubliez les objectifs. Concentrez-vous sur le système.", author: "James Clear — Atomic Habits" },
+
+  /* ── Classiques ── */
   { text: "Nous sommes ce que nous faisons de manière répétée. L'excellence est donc une habitude, non un acte isolé.", author: "Aristote" },
   { text: "La discipline est le pont entre les objectifs et les accomplissements.", author: "Jim Rohn" },
   { text: "Un voyage de mille lieues commence toujours par un premier pas.", author: "Lao Tseu" },
   { text: "Ce n'est pas parce que les choses sont difficiles que nous n'osons pas. C'est parce que nous n'osons pas qu'elles sont difficiles.", author: "Sénèque" },
   { text: "La plus grande gloire n'est pas de ne jamais tomber, mais de se relever à chaque chute.", author: "Nelson Mandela" },
-  { text: "Le seul moyen de faire du bon travail est d'aimer ce que vous faites.", author: "Steve Jobs" },
   { text: "L'avenir appartient à ceux qui croient à la beauté de leurs rêves.", author: "Eleanor Roosevelt" },
   { text: "Commence là où tu es, utilise ce que tu as, fais ce que tu peux.", author: "Arthur Ashe" },
   { text: "La force ne vient pas des capacités physiques. Elle vient d'une volonté indomptable.", author: "Mahatma Gandhi" },
   { text: "Prends soin de ton corps. C'est le seul endroit où tu auras toujours à vivre.", author: "Jim Rohn" },
-  { text: "Les habitudes sont les intérêts composés de l'amélioration de soi.", author: "James Clear — Atomic Habits" },
-  { text: "Un 1% d'amélioration chaque jour mène à des résultats 37 fois meilleurs en un an.", author: "James Clear — Atomic Habits" },
-  { text: "Le corps atteint ce que l'esprit croit.", author: "Napoleon Hill" },
   { text: "Ce que tu fais chaque jour importe plus que ce que tu fais de temps en temps.", author: "Gretchen Rubin" },
   { text: "La santé n'est pas tout, mais sans la santé, tout n'est rien.", author: "Arthur Schopenhauer" },
   { text: "Votre avenir est créé par ce que vous faites aujourd'hui, pas demain.", author: "Robert Kiyosaki" },
@@ -27,9 +48,18 @@ const QUOTES = [
   { text: "La constance bat le talent quand le talent n'est pas constant.", author: "Tim Notke" },
   { text: "Le changement est difficile au début, chaotique au milieu, magnifique à la fin.", author: "Robin Sharma" },
   { text: "Fais de chaque jour ton chef-d'œuvre.", author: "John Wooden" },
-  { text: "L'identité émerge de l'habitude. Chaque action est un vote pour la personne que tu veux devenir.", author: "James Clear — Atomic Habits" },
   { text: "La santé est le premier devoir de la vie.", author: "Oscar Wilde" },
   { text: "Ce n'est pas la montagne que nous conquérons, mais nous-mêmes.", author: "Sir Edmund Hillary" },
+  { text: "Le seul moyen de faire du bon travail est d'aimer ce que vous faites.", author: "Steve Jobs" },
+  { text: "Celui qui déplace les montagnes commence par soulever les petites pierres.", author: "Confucius" },
+  { text: "La vie récompense l'action, pas la réflexion sur l'action.", author: "Tony Robbins" },
+  { text: "Chaque expert a un jour été un débutant.", author: "Helen Hayes" },
+  { text: "La douleur de la discipline est bien moindre que la douleur du regret.", author: "Jim Rohn" },
+  { text: "Soyez le changement que vous voulez voir dans le monde.", author: "Mahatma Gandhi" },
+  { text: "Le secret du succès est la constance dans la poursuite d'un but.", author: "Benjamin Disraeli" },
+  { text: "On ne trouve pas le temps, on le prend.", author: "Charles Birot" },
+  { text: "Agir sans réfléchir, c'est tirer sans viser.", author: "Proverbe" },
+  { text: "La répétition est la mère de la compétence.", author: "Tony Robbins" },
 ];
 
 /* ── Emojis & Colors ──────────────────────────────────────── */

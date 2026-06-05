@@ -65,7 +65,9 @@ button { cursor: pointer; border: none; background: none; }
   padding: 0 8px 28px;
 }
 .logo-icon { font-size: 1.6rem; }
-.logo-text { font-size: 1.25rem; font-weight: 700; letter-spacing: -.3px; }
+.logo-text { font-size: 1.25rem; font-weight: 700; letter-spacing: -.3px; display: flex; align-items: center; gap: 8px; }
+.logo-img { width: 34px; height: 34px; display: inline-block; vertical-align: middle; }
+.logo-img--mobile { width: 26px; height: 26px; }
 
 .sidebar-nav {
   display: flex;
@@ -190,6 +192,7 @@ button { cursor: pointer; border: none; background: none; }
   width: 120px; height: 120px;
   border-radius: 50%;
   background: rgba(255,255,255,.08);
+  pointer-events: none;
 }
 .motivation-icon { font-size: 1.6rem; flex-shrink: 0; }
 .motivation-text { color: #fff; font-size: .95rem; line-height: 1.5; flex: 1; font-style: italic; }
@@ -761,6 +764,7 @@ button { cursor: pointer; border: none; background: none; }
 }
 .auth-logo .logo-icon { font-size: 1.8rem; }
 .auth-logo .logo-text { font-size: 1.35rem; font-weight: 800; }
+.auth-logo .logo-img { width: 42px; height: 42px; }
 
 .auth-tagline {
   color: var(--text2);
@@ -841,9 +845,11 @@ button { cursor: pointer; border: none; background: none; }
   min-width: 0;
 }
 .motivation-author {
-  font-size: .78rem;
-  color: var(--text2);
-  font-style: italic;
+  font-size: .8rem;
+  color: rgba(255,255,255,.72);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .01em;
 }
 
 /* ── Drag handle ──────────────────────────────────────────── */
