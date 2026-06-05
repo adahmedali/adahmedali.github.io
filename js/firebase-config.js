@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
@@ -15,6 +15,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const analytics = getAnalytics(app);
+// Analytics est optionnel : il échoue silencieusement en localhost/file://
+// sans bloquer auth ni Firestore.
+export const analytics = await isSupported().then(ok => ok ? getAnalytics(app) : null);
+
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const db   = getFirestore(app);
