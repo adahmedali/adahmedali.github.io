@@ -32,14 +32,16 @@ function habitDoc(uid, habitId) {
  */
 export async function addHabit(uid, habitData) {
   const ref = await addDoc(habitsRef(uid), {
-    name: habitData.name,
-    emoji: habitData.emoji ?? "⚡",
-    color: habitData.color ?? "#7c6af7",
-    desc: habitData.desc ?? "",
-    freq: habitData.freq ?? 7,
-    createdAt: habitData.createdAt ?? new Date().toISOString().slice(0, 10),
-    completions: habitData.completions ?? [],
-    updatedAt: serverTimestamp(),
+    name:               habitData.name,
+    emoji:              habitData.emoji              ?? "⚡",
+    color:              habitData.color              ?? "#7c6af7",
+    desc:               habitData.desc               ?? "",
+    freq:               habitData.freq               ?? 7,
+    createdAt:          habitData.createdAt          ?? new Date().toISOString().slice(0, 10),
+    completions:        habitData.completions        ?? [],
+    subtasks:           habitData.subtasks           ?? [],
+    subtaskCompletions: habitData.subtaskCompletions ?? {},
+    updatedAt:          serverTimestamp(),
   });
   return ref;
 }

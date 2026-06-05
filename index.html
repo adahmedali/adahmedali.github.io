@@ -110,7 +110,10 @@
     <!-- Motivation -->
     <div class="motivation-card" id="motivationCard">
       <span class="motivation-icon">💬</span>
-      <p class="motivation-text" id="motivationText"></p>
+      <div class="motivation-body">
+        <p class="motivation-text" id="motivationText"></p>
+        <span class="motivation-author" id="motivationAuthor"></span>
+      </div>
       <button class="btn-refresh-quote" id="refreshQuote" title="Nouvelle citation">🔄</button>
     </div>
 
@@ -233,6 +236,10 @@
       <label>Fréquence cible (jours/semaine)
         <input type="range" id="habitFreq" min="1" max="7" value="7"/>
         <span id="freqLabel">7 jours / semaine</span>
+      </label>
+      <label>Sous-tâches <span class="label-optional">(optionnel)</span>
+        <div class="subtask-fields" id="subtaskFields"></div>
+        <button type="button" class="btn-add-subtask" id="btnAddSubtask">+ Ajouter une sous-tâche</button>
       </label>
     </div>
     <div class="modal-footer">

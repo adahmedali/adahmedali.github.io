@@ -111,13 +111,15 @@ let previousHabitsSnapshot = null;    // null = Firebase initial data not yet re
 // Deep clone for snapshot comparison (only the fields we diff on)
 function cloneHabits(habits) {
   return habits.map(h => ({
-    id:          h.id,
-    name:        h.name,
-    emoji:       h.emoji,
-    color:       h.color,
-    desc:        h.desc,
-    freq:        h.freq,
-    completions: [...(h.completions ?? [])],
+    id:                  h.id,
+    name:                h.name,
+    emoji:               h.emoji,
+    color:               h.color,
+    desc:                h.desc,
+    freq:                h.freq,
+    completions:         [...(h.completions ?? [])],
+    subtasks:            JSON.parse(JSON.stringify(h.subtasks ?? [])),
+    subtaskCompletions:  JSON.parse(JSON.stringify(h.subtaskCompletions ?? {})),
   }));
 }
 
@@ -130,14 +132,16 @@ function syncToLocalStorage(habits) {
   const localTheme = raw ? (JSON.parse(raw).theme ?? "dark") : "dark";
 
   const normalized = habits.map(h => ({
-    id:          h.id,
-    name:        h.name        ?? "",
-    emoji:       h.emoji       ?? "⚡",
-    color:       h.color       ?? "#7c6af7",
-    desc:        h.desc        ?? "",
-    freq:        h.freq        ?? 7,
-    createdAt:   h.createdAt   ?? "",
-    completions: h.completions ?? [],
+    id:                  h.id,
+    name:                h.name                ?? "",
+    emoji:               h.emoji               ?? "⚡",
+    color:               h.color               ?? "#7c6af7",
+    desc:                h.desc                ?? "",
+    freq:                h.freq                ?? 7,
+    createdAt:           h.createdAt           ?? "",
+    completions:         h.completions         ?? [],
+    subtasks:            h.subtasks            ?? [],
+    subtaskCompletions:  h.subtaskCompletions  ?? {},
   }));
 
   localStorage.setItem("habitflow_v2", JSON.stringify({
@@ -190,20 +194,24 @@ async function applyDiff(uid, prev, curr) {
         if (!currDates.has(date)) ops.push(uncheckHabit(uid, id, date));
       }
 
-      // Metadata update only if something actually changed
+      // Metadata + subtasks update only if something actually changed
       if (
         habit.name  !== prevHabit.name  ||
         habit.emoji !== prevHabit.emoji ||
         habit.color !== prevHabit.color ||
         habit.desc  !== prevHabit.desc  ||
-        habit.freq  !== prevHabit.freq
+        habit.freq  !== prevHabit.freq  ||
+        JSON.stringify(habit.subtasks)           !== JSON.stringify(prevHabit.subtasks) ||
+        JSON.stringify(habit.subtaskCompletions) !== JSON.stringify(prevHabit.subtaskCompletions)
       ) {
         ops.push(updateHabit(uid, id, {
-          name:  habit.name,
-          emoji: habit.emoji,
-          color: habit.color,
-          desc:  habit.desc,
-          freq:  habit.freq,
+          name:                habit.name,
+          emoji:               habit.emoji,
+          color:               habit.color,
+          desc:                habit.desc,
+          freq:                habit.freq,
+          subtasks:            habit.subtasks            ?? [],
+          subtaskCompletions:  habit.subtaskCompletions  ?? {},
         }));
       }
     }

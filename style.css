@@ -503,15 +503,6 @@ button { cursor: pointer; border: none; background: none; }
 }
 .cal-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.6); }
 
-.cal-detail {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  min-height: 80px;
-}
-.cal-detail-placeholder { color: var(--text2); font-size: .9rem; }
-
 /* ── Manage Habits ─────────────────────────────────────────── */
 .manage-list {
   display: flex;
@@ -840,4 +831,247 @@ button { cursor: pointer; border: none; background: none; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 99px; }
+
+/* ── Motivation card (author) ─────────────────────────────── */
+.motivation-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.motivation-author {
+  font-size: .78rem;
+  color: var(--text2);
+  font-style: italic;
+}
+
+/* ── Drag handle ──────────────────────────────────────────── */
+.drag-handle {
+  cursor: grab;
+  color: var(--text2);
+  font-size: 1.1rem;
+  padding: 0 4px;
+  opacity: .5;
+  flex-shrink: 0;
+  user-select: none;
+  transition: opacity var(--transition);
+}
+.habit-item:hover .drag-handle { opacity: 1; }
+.habit-item.dragging {
+  opacity: .45;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.habit-item.drag-over {
+  border-top: 2px solid var(--accent);
+}
+
+/* ── Subtask list (today view) ────────────────────────────── */
+.subtask-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+}
+.subtask-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--bg3);
+  transition: background var(--transition);
+}
+.subtask-item:hover { background: rgba(124,106,247,.12); }
+.subtask-item.done .subtask-label { text-decoration: line-through; color: var(--text2); }
+.subtask-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  background: transparent;
+  transition: background var(--transition), border-color var(--transition);
+}
+.subtask-item.done .subtask-check {
+  background: var(--green);
+  border-color: var(--green);
+}
+.subtask-item.done .subtask-check::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(40deg) translate(2px, -1px);
+}
+.subtask-label {
+  font-size: .83rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+.sub-progress {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text2);
+}
+.sub-progress.all-done { color: var(--green); }
+
+/* ── Subtask fields (modal) ───────────────────────────────── */
+.label-optional {
+  font-weight: 400;
+  color: var(--text2);
+  font-size: .8rem;
+  margin-left: 4px;
+}
+.subtask-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+.subtask-field {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.subtask-input {
+  flex: 1;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--text);
+  font-size: .88rem;
+  outline: none;
+}
+.subtask-input:focus { border-color: var(--accent); }
+.btn-remove-subtask {
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(239,68,68,.15);
+  color: var(--red);
+  font-size: .8rem;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+.btn-remove-subtask:hover { background: rgba(239,68,68,.3); }
+.btn-add-subtask {
+  margin-top: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: rgba(124,106,247,.15);
+  color: var(--accent);
+  font-size: .85rem;
+  transition: background var(--transition);
+  display: inline-block;
+  width: fit-content;
+}
+.btn-add-subtask:hover { background: rgba(124,106,247,.3); }
+
+/* ── Calendar detail ──────────────────────────────────────── */
+.cal-detail {
+  margin-top: 20px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  min-height: 60px;
+}
+.cal-detail-placeholder {
+  color: var(--text2);
+  font-size: .9rem;
+  text-align: center;
+  padding: 12px 0;
+}
+.cal-detail-head {
+  margin-bottom: 14px;
+}
+.cal-detail-head h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+}
+.cal-detail-score {
+  font-size: .82rem;
+  color: var(--text2);
+  display: block;
+  margin-top: 4px;
+}
+.cal-detail-bar-wrap {
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.cal-detail-bar {
+  height: 100%;
+  background: var(--accent-g);
+  border-radius: 99px;
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+.cal-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.cal-detail-habit {
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+}
+.cal-detail-habit.done { border-color: rgba(34,197,94,.3); }
+.cal-detail-habit.missed { border-color: rgba(239,68,68,.12); opacity: .8; }
+.cal-detail-habit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cal-detail-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.cal-detail-hname {
+  flex: 1;
+  font-size: .9rem;
+  font-weight: 500;
+}
+.cal-detail-tick {
+  font-size: .9rem;
+  font-weight: 700;
+}
+.cal-detail-habit.done .cal-detail-tick { color: var(--green); }
+.cal-detail-habit.missed .cal-detail-tick { color: var(--red); }
+.cal-detail-subtasks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+  padding-left: 36px;
+}
+.cal-detail-sub {
+  font-size: .75rem;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.cal-detail-sub.done {
+  background: rgba(34,197,94,.12);
+  border-color: rgba(34,197,94,.3);
+  color: var(--green);
+}
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
